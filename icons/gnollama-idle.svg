@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- GnOllama icon – server idle / no models loaded (orange) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="16" height="16">
+  <!-- Tail -->
+  <ellipse cx="12" cy="58" rx="7" ry="11" fill="#cc7700"/>
+  <!-- Body -->
+  <ellipse cx="46" cy="65" rx="34" ry="24" fill="#cc7700"/>
+  <!-- Neck -->
+  <polygon points="62,43 74,43 78,65 58,65" fill="#cc7700"/>
+  <!-- Head -->
+  <circle cx="80" cy="30" r="16" fill="#cc7700"/>
+  <!-- Left ear -->
+  <polygon points="70,14 74,26 66,26" fill="#cc7700"/>
+  <!-- Right ear -->
+  <polygon points="78,12 82,24 74,24" fill="#cc7700"/>
+  <!-- Snout -->
+  <ellipse cx="93" cy="34" rx="6" ry="5" fill="#cc7700"/>
+  <!-- Back legs -->
+  <rect x="16" y="87" width="9" height="13" rx="3" fill="#cc7700"/>
+  <rect x="30" y="87" width="9" height="13" rx="3" fill="#cc7700"/>
+  <!-- Front legs -->
+  <rect x="52" y="87" width="9" height="13" rx="3" fill="#cc7700"/>
+  <rect x="66" y="87" width="9" height="13" rx="3" fill="#cc7700"/>
+</svg>
