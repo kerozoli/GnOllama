@@ -3,7 +3,7 @@
   "description": "Monitor and manage your Ollama server from the GNOME Shell panel. Shows a llama icon that turns red when the server is offline, orange when it is idle, and green when models are actively loaded.",
   "uuid": "gnollama@kerozoli.github.com",
   "version": 1,
-  "shell-version": ["45", "46", "47", "48", "49", "50"],
+  "shell-version": ["44", "45", "46", "47", "48", "49", "50"],
   "url": "https://github.com/kerozoli/GnOllama",
   "settings-schema": "org.gnome.shell.extensions.gnollama",
   "gettext-domain": "gnollama"
