@@ -3,29 +3,14 @@
  *
  * Shown when the user clicks "Settings" in the dropdown or opens the extension
  * settings from GNOME Extensions.
+ *
+ * Requires GNOME Shell 45+ (libadwaita 1.4+).
  */
 
 import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
-
-const SETTINGS_SCHEMA = 'org.gnome.shell.extensions.gnollama';
-
-// resource:///org/gnome/shell/extensions/prefs.js was introduced in GNOME Shell
-// 45.  On GNOME Shell 44 the resource doesn't exist yet, which would cause a
-// fatal ImportError if we used a static import.  Use a dynamic import with a
-// minimal fallback so the preferences window still opens on GNOME Shell 44.
-let ExtensionPreferences, _ = s => s;
-try {
-    ({ExtensionPreferences, gettext: _} =
-        await import('resource:///org/gnome/shell/extensions/prefs.js'));
-} catch (_e) {
-    ExtensionPreferences = class {
-        getSettings() {
-            return Gio.Settings.new(SETTINGS_SCHEMA);
-        }
-    };
-}
+import {ExtensionPreferences, gettext as _} from 'resource:///org/gnome/shell/extensions/prefs.js';
 
 export default class GnOllamaPreferences extends ExtensionPreferences {
 
@@ -60,13 +45,10 @@ export default class GnOllamaPreferences extends ExtensionPreferences {
         page.add(pollingGroup);
 
         // Poll interval (5 – 300 seconds)
-        // Use ActionRow + SpinButton instead of SpinRow: Adw.SpinRow requires
-        // libadwaita 1.4 (GNOME 45+) and is not available on GNOME 44.
-        const intervalRow = new Adw.ActionRow({
+        // Adw.SpinRow is available since libadwaita 1.4 (GNOME 45+).
+        const intervalRow = new Adw.SpinRow({
             title: _('Poll Interval'),
             subtitle: _('Seconds between status checks (5 – 300)'),
-        });
-        const spinButton = new Gtk.SpinButton({
             adjustment: new Gtk.Adjustment({
                 lower: 5,
                 upper: 300,
@@ -74,16 +56,8 @@ export default class GnOllamaPreferences extends ExtensionPreferences {
                 page_increment: 30,
                 value: settings.get_int('poll-interval'),
             }),
-            valign: Gtk.Align.CENTER,
         });
-        settings.bind(
-            'poll-interval',
-            spinButton,
-            'value',
-            Gio.SettingsBindFlags.DEFAULT
-        );
-        intervalRow.add_suffix(spinButton);
-        intervalRow.activatable_widget = spinButton;
+        settings.bind('poll-interval', intervalRow, 'value', Gio.SettingsBindFlags.DEFAULT);
         pollingGroup.add(intervalRow);
     }
 }
